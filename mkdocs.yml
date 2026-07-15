@@ -1,0 +1,43 @@
+site_name: RNA CryoEM Ensemble Reweighting
+site_description: A tutorial walkthrough of the RNA cryoEM ensemble reweighting pipeline
+site_url: https://picossio.github.io/rna-cryoem-reweighting/
+repo_url: https://github.com/picossio/rna-cryoem-reweighting
+repo_name: picossio/rna-cryoem-reweighting
+use_directory_urls: false
+
+theme:
+  name: material
+  palette:
+    scheme: default
+    primary: indigo
+    accent: indigo
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - content.code.copy
+    - toc.follow
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - md_in_html
+  - tables
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+nav:
+  - Home: index.md
+  - Overview: overview.md
+  - Inputs: inputs.md
+  - Pipeline:
+      - "1. Coarse-grained sampling": stage1-sampling.md
+      - "2. Conformational subset construction": stage2-conformational-subset.md
+      - "3. Likelihood": stage3-likelihood.md
+      - "4. Ensemble reweighting": stage4-reweighting.md
+      - "5. Gaussian mixture model": stage5-gmm.md
+  - Outputs: outputs.md
+  - About: about.md

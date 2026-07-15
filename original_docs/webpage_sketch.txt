@@ -1,0 +1,107 @@
+# 🧬 RNA CryoEM Reweighting
+
+Intro paragraph Objective
+
+# CryoEM ensemble reweighting of RNAs
+
+Main idea of the method
+
+!Diagram_Method.001.jpeg
+
+---
+
+## Inputs
+
+**CryoEM particles**
+
+Experimental particle images from cryo-electron microscopy
+
+**RNA sequence + secondary structure**
+
+Sequence information and predicted/known secondary structure
+
+---
+
+## 1) Coarse-grained sampling
+
+Description of the coarse-grained sampling method. We fix the secondary structure and allow conformational sampling with different forcefields
+
+- Martini
+- Spqr
+- Farfar
+
+### **Output**
+
+Conformational samples or long trajectories - in PDB format.  
+
+---
+
+## 2) Conformational subset construction
+
+### Inputs
+
+- Frames
+- CVs to perform FPS on.
+- Number of clusters
+
+Description of the conformational subset construction method.
+
+- we have an inhouse script for FPS selection and building the GMM
+
+### Outputs
+
+- **Representative conformations**: Selected conformations representing the ensemble - in PDB format (can be all atom or 1 bead per residue)
+- **Covariance**: Covariance information from the conformational analysis - covariance matrix 3Nx3N (size)
+
+---
+
+## 3) Likelihood
+
+### Inputs
+
+- CryoEM particle images
+- Representative conformations from (2).
+
+Description of the likelihood calculation method...
+
+- cryolike
+- cryoSBI
+
+### Outputs
+
+- Image-to-conformation likelihood matrix
+
+---
+
+## 4) Ensemble reweighting
+
+### Inputs
+
+- Image-to-conformation likelihood matrix from step (3).
+- Gradient descent hyperparams.
+
+Description of the ensemble reweighting method...
+
+- in house script to do this with the EM. (Luke)
+
+### Outputs
+
+- **Weights**: Reweighted probabilities for each conformation
+
+---
+
+## 5) Gaussian mixture model
+
+### Inputs
+
+- weights
+- conformations
+- covariance
+
+Description of the Gaussian mixture model method...
+
+- related to 2) in house script for the inference.
+
+### Final Output
+
+- **Conformational samples from probability distribution**: Final ensemble of conformations sampled from the resulting probability distribution
