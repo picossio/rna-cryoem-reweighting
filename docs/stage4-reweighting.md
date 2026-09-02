@@ -8,9 +8,11 @@ each representative conformation should count toward the final ensemble.
 
 ## Method
 
-We use a multiplicative gradient procedure with early stopping that
+We use an early-stopped multiplicative gradient procedure that
 iteratively updates the per-conformation weights so that the weighted
-ensemble best explains the observed particle image set. See the Supplementary Information section 3.5 for details on how this method is adapted to the compositional species and nested likelihood, and the [corresponding manuscript](https://www.nature.com/articles/s42003-026-09859-6) introducing this method for cryo-EM.
+ensemble best explains the observed particle image set. 
+
+See the Supplementary Information section 3.5 for details on how this method is adapted to the compositional species and nested likelihood, and the [corresponding manuscript](https://www.nature.com/articles/s42003-026-09859-6) introducing this method for cryo-EM.
 
 <div class="grid cards" markdown>
 
