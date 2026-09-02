@@ -1,18 +1,20 @@
-# 3. Likelihood
+# 2. Likelihood
 
-Each representative conformation from Stage 2 is scored against the
-experimental cryoEM particle images: how well does this 3D shape explain what
-the microscope actually saw?
+Each representative conformation from Stage 1 is scored against the
+experimental cryoEM particle images: how well does this 3D shape explain each
+image?
 
 !!! info "Inputs"
-    - CryoEM particle images (see [Inputs](inputs.md))
-    - Representative conformations from [Stage 2](stage2-conformational-subset.md)
+    - CryoEM particle images (see [CryoEM particles](inputs-cryoem.md))
+    - Representative conformations from [Stage 1](stage2-conformational-subset.md)
 
 ## Method
 
-Description of the likelihood calculation method — each conformation is
-forward-projected and compared against the particle images to compute an
-image-to-conformation likelihood.
+Each conformation is compared against each particle image by generating 2D
+templates at different poses. We use two likelihood estimators: explicit
+integration over poses (cryoLike) and amortized integration over poses
+(cryoSBI). See the Supplementary Information for details on when each is
+best suited.
 
 <div class="grid cards" markdown>
 
@@ -24,6 +26,6 @@ image-to-conformation likelihood.
 </div>
 
 !!! success "Outputs"
-    - Image-to-conformation likelihood matrix
+    - Image-to-structure likelihood matrix
 
-Next: [4. Ensemble reweighting →](stage4-reweighting.md)
+Next: [3. Ensemble reweighting →](stage4-reweighting.md)

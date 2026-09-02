@@ -1,17 +1,20 @@
-# 1. Coarse-grained sampling
+# Prior ensemble
 
 We fix the RNA secondary structure and sample conformational space using a
 coarse-grained forcefield, generating a large pool of candidate 3D structures
 (or long trajectories) consistent with that secondary structure.
 
-!!! info "Inputs"
-    - RNA sequence + secondary structure (see [Inputs](inputs.md))
+!!! warning "Requirements"
+    The prior ensemble should sample the full conformational space, capturing
+    all conformational changes relevant to the data.
 
 ## Method
 
-Description of the coarse-grained sampling method — the secondary structure is
-held fixed while the tertiary fold is allowed to explore conformational space
-under a chosen forcefield.
+Several CG sampling methods can be used to generate the prior ensemble,
+typically starting from a PDB structure (for example, a cryo-EM
+reconstruction), fixing the secondary structure, and allowing the tertiary
+fold to explore conformational space under a chosen forcefield. We reference
+several CG methods below, but do not provide implementation details here.
 
 Supported forcefields / tools:
 
@@ -26,7 +29,7 @@ Supported forcefields / tools:
 
 </div>
 
-!!! success "Outputs"
+!!! info "Inputs"
     - Conformational samples or long trajectories, in PDB format.
 
-Next: [2. Conformational subset construction →](stage2-conformational-subset.md)
+Next: [1. Conformational subset construction →](stage2-conformational-subset.md)

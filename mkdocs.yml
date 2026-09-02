@@ -9,8 +9,8 @@ theme:
   name: material
   palette:
     scheme: default
-    primary: indigo
-    accent: indigo
+    primary: teal
+    accent: teal
   features:
     - navigation.tabs
     - navigation.sections
@@ -18,6 +18,9 @@ theme:
     - search.suggest
     - content.code.copy
     - toc.follow
+
+extra_css:
+  - stylesheets/extra.css
 
 markdown_extensions:
   - admonition
@@ -32,12 +35,13 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Overview: overview.md
-  - Inputs: inputs.md
+  - Inputs:
+      - "CryoEM particles": inputs-cryoem.md
+      - "Prior ensemble": inputs-cg-sampling.md
   - Pipeline:
-      - "1. Coarse-grained sampling": stage1-sampling.md
-      - "2. Conformational subset construction": stage2-conformational-subset.md
-      - "3. Likelihood": stage3-likelihood.md
-      - "4. Ensemble reweighting": stage4-reweighting.md
-      - "5. Gaussian mixture model": stage5-gmm.md
+      - "1. Conformational subset construction": stage2-conformational-subset.md
+      - "2. Likelihood": stage3-likelihood.md
+      - "3. Ensemble reweighting": stage4-reweighting.md
+      - "4. Gaussian mixture model": stage5-gmm.md
   - Outputs: outputs.md
   - About: about.md
