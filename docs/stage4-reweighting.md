@@ -10,11 +10,20 @@ each representative conformation should count toward the final ensemble.
 
 We use a multiplicative gradient procedure with early stopping that
 iteratively updates the per-conformation weights so that the weighted
-ensemble best explains the observed particle image set.
+ensemble best explains the observed particle image set. See the Supplementary Information section 3.5 for details on how this method is adapted to the compositional species and nested likelihood, and the [corresponding manuscript](https://www.nature.com/articles/s42003-026-09859-6) introducing this method for cryo-EM.
 
-!!! warning "🚧 Tool link coming soon"
-    The EM reweighting script isn't public yet. This section will
-    link directly to it once it's released.
+<div class="grid cards" markdown>
+
+- **cryoGMM** — script for multiplicative gradient procedure.
+  [:material-github: minhuanli/cryoGMM](https://github.com/minhuanli/cryoGMM/blob/master/cryogmm/utils/reweighting.py)
+
+</div>
+
+Given a log-likelihood matrix, particularly the **Image-to-Structure Likelihood-matrix** from [stage 2](https://picossio.github.io/rna-cryoem-reweighting/stage3-likelihood.html), this code can be run as:
+```
+weights = multiplicative_gradient(log_likelihood)
+```
+which early-stops at a default tolerance of `tol=10**-3.` 
 
 !!! success "Outputs"
     - **Weights** — reweighted probabilities for each conformation
