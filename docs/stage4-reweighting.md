@@ -14,16 +14,16 @@ ensemble best explains the observed particle image set. See the Supplementary In
 
 <div class="grid cards" markdown>
 
-- **cryoGMM** — script for multiplicative gradient procedure.
+- **cryoGMM** — script for multiplicative gradient procedure
   [:material-github: minhuanli/cryoGMM](https://github.com/minhuanli/cryoGMM/blob/master/cryogmm/utils/reweighting.py)
 
 </div>
 
-Given a log-likelihood matrix, particularly the **Image-to-Structure Likelihood-matrix** from [stage 2](https://picossio.github.io/rna-cryoem-reweighting/stage3-likelihood.html), this code can be run as:
+Given a log-likelihood matrix, particularly the **Image-to-Structure Likelihood-matrix** from [stage 2](stage3-likelihood.md), this code can be run as:
 ```
 weights = multiplicative_gradient(log_likelihood)
 ```
-which early-stops at a default tolerance of `tol=10**-3.` 
+which gets the weights from early-stopping at a default tolerance of `tol=10**-3`.
 
 !!! success "Outputs"
     - **Weights** — reweighted probabilities for each conformation
