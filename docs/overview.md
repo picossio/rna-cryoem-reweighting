@@ -32,6 +32,32 @@ That's done in several stages, starting from the inputs:
 
 ![Pipeline overview](assets/images/Diagram.png){ .centered-figure width="320" }
 
+## Software
+
+Stages 1, 3 and 4 all run out of a single package, **cryoGMM**. Install it once
+before you start:
+
+```bash
+git clone https://github.com/minhuanli/cryoGMM.git
+cd cryoGMM
+pip install -e .
+```
+
+That pulls in `numpy`, `torch`, `mdtraj`, `scikit-learn`, `fpsample`, `tqdm`
+and `matplotlib`. Stages 1 and 3 run comfortably on a laptop; Stage 4 expects a
+GPU by default (`--device cuda:0`).
+
+Stage 2 uses a separate likelihood package — either
+[CryoLike](https://github.com/flatironinstitute/CryoLike) or
+[cryoSBI](https://github.com/flatironinstitute/cryoSBI) — each with its own
+installation instructions; see that stage's page.
+
+Generating the prior ensemble in the first place needs a coarse-grained
+sampling package, which is outside this pipeline; see
+[Prior ensemble](inputs-cg-sampling.md).
+
+## Where to go next
+
 Each stage has its own page — see [CryoEM particles](inputs-cryoem.md) and
 [Prior ensemble](inputs-cg-sampling.md) for what feeds the pipeline,
 then walk through [Stage 1](stage2-conformational-subset.md) onward, and
