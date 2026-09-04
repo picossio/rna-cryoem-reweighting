@@ -40,7 +40,7 @@ and a large matrix can be pushed onto a GPU with `--device cuda:0`.
 | `--output` | **Required.** Where the weights go. `.pt` is what [Stage 4](stage5-gmm.md) reads; `.npy` also works. |
 | `--tol` | Early-stopping tolerance. Default `1e-3`. |
 | `--device` | `cpu` (default) or e.g. `cuda:0`. |
-| `--double` | Flag. Run in float64 — worth it for a very tight `--tol`. |
+| `--double` | Flag. Run in float64; helpful for small `--tol` or when many weights are near 0. |
 
 `--max_iterations`, `--stats_frequency` and `--verbose` are also available; the
 complete list is in the
@@ -73,16 +73,16 @@ denominator is the current mixture's density for that image. In the code this
 runs entirely in log space, via `logsumexp`, so it stays numerically stable for
 the very small likelihoods typical of noisy particle images.
 
-Written this way the weights look after themselves — they start uniform, stay
-non-negative, and stay normalised, with no projection step. It is the
+Written this way the weights start uniform, stay
+non-negative, and stay normalized, with no projection step. It is the
 expectation-maximization update for mixture proportions, and every step is
 guaranteed not to decrease the likelihood.
 
-Iteration stops on a **certificate** rather than a fixed budget. The quantity
+Iteration stops on a user-set tolerance rather than a fixed budget of iterations. The quantity
 `max(grad) - 1` upper-bounds the gap between the current log-likelihood and
 that of the optimal weights, so once it falls below `--tol` the weights are
 known to be within `tol` of the best achievable. That is what "early-stopped"
-means here: not a heuristic cutoff, but a bound.
+means here: it is a bound as opposed to a heuristic cutoff.
 
 See the Supplementary Information section 3.5 for how this is adapted to
 compositional species and nested likelihoods, and the
