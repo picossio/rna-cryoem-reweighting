@@ -14,7 +14,7 @@ actually adopts.
 
 The pipeline has two inputs — cryo-EM particles and a modelled prior ensemble —
 and four stages that turn them into a final conformational ensemble. Each stage
-page below links out to the specific tool or in-house script used, so you can
-go as deep as you like.
+page below links out to the specific script used, so you can go as deep as
+you like.
 
 [Start with the Overview →](overview.md){ .md-button .md-button--primary }

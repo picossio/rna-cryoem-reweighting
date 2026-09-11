@@ -25,6 +25,13 @@ best suited.
 
 </div>
 
+!!! note "Compositional species"
+    The likelihood matrix can be built with both conformational and
+    compositional species. When the sample contains several species — for
+    P4-P6, monomer conformations alongside dimers and a junk/noise class with
+    cryoSBI — the extra columns are additional mixture components, that will
+    be reweighted in [Stage 3](stage4-reweighting.md).
+
 !!! success "Outputs"
     - Image-to-structure likelihood matrix
 

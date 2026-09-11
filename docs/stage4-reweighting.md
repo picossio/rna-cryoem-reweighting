@@ -60,41 +60,24 @@ Weights written to /data/sbi/set_0/J1001/weights.pt
 ## How it works
 
 Treat the ensemble as a mixture whose components are the fixed representative
-conformations and whose proportions are unknown. Each iteration scales every
-weight by the average, over images, of how much that conformation contributes
-to explaining each image relative to the current mixture:
+conformations and whose proportions are unknown. Starting from uniform
+weights, each iteration reweights every conformation upward or downward based
+on how much it helps explain the images, given the current mixture — the
+standard expectation-maximization update for mixture proportions. Weights stay
+non-negative and normalized throughout, with no separate projection step, and
+every iteration is guaranteed not to decrease the likelihood.
 
-```
-w_j  ←  w_j · (1/n) Σ_i  L_ij / ( Σ_k w_k L_ik )
-```
+Iteration stops on a user-set tolerance rather than a fixed budget of
+iterations. The quantity `max(grad) - 1` upper-bounds the gap between the
+current log-likelihood and that of the optimal weights, so once it falls
+below `--tol` the weights are known to be within `tol` of the best
+achievable. That is what "early-stopped" means here: it is a bound as
+opposed to a heuristic cutoff — see details in
+[Mordant et al.](https://arxiv.org/html/2609.01688v1).
 
-where `L_ij` is the likelihood of image `i` under conformation `j`, and the
-denominator is the current mixture's density for that image. In the code this
-runs entirely in log space, via `logsumexp`, so it stays numerically stable for
-the very small likelihoods typical of noisy particle images.
-
-Written this way the weights start uniform, stay
-non-negative, and stay normalized, with no projection step. It is the
-expectation-maximization update for mixture proportions, and every step is
-guaranteed not to decrease the likelihood.
-
-Iteration stops on a user-set tolerance rather than a fixed budget of iterations. The quantity
-`max(grad) - 1` upper-bounds the gap between the current log-likelihood and
-that of the optimal weights, so once it falls below `--tol` the weights are
-known to be within `tol` of the best achievable. That is what "early-stopped"
-means here: it is a bound as opposed to a heuristic cutoff.
-
-See the Supplementary Information section 3.5 for how this is adapted to
-compositional species and nested likelihoods, and the
-[corresponding manuscript](https://www.nature.com/articles/s42003-026-09859-6)
-introducing the method for cryo-EM.
-
-!!! note "Compositional species"
-    Columns of the likelihood matrix need not all be conformations. When the
-    sample contains several species — for P4-P6, monomer conformations
-    alongside dimers and a junk/noise class — the extra columns are additional
-    mixture components, reweighted alongside the conformations in the same
-    pass. The resulting vector is what Stage 4 consumes.
+See the Supplementary Information section 3.5 of
+[Evans et al.](https://www.nature.com/articles/s42003-026-09859-6) for how
+this is adapted to compositional species and nested likelihood.
 
 ## Checking the result
 
@@ -115,7 +98,8 @@ ensemble will look much like the prior.
 
 Neither extreme is a failure on its own — a genuinely narrow ensemble *should*
 concentrate — but the value is worth comparing across your
-[sets](stage2-conformational-subset.md#how-many-sets). Run with `--verbose` to
+[sets](stage2-conformational-subset.md#how-many-sets) and different `tol`
+thresholds. Run with `--verbose` to
 watch the loss; it cannot increase, so an increase indicates a numerical
 problem, and `--double` is the first thing to try.
 

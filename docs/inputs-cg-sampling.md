@@ -16,8 +16,6 @@ reconstruction), fixing the secondary structure, and allowing the tertiary
 fold to explore conformational space under a chosen forcefield. We reference
 several CG methods below, but do not provide implementation details here.
 
-Supported forcefields / tools:
-
 <div class="grid cards" markdown>
 
 - **Martini**

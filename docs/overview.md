@@ -30,7 +30,7 @@ That's done in several stages, starting from the inputs:
    (plus their covariance) to build a smooth probability distribution over
    RNA shape space, and draw a full conformational ensemble from it.
 
-![Pipeline overview](assets/images/Diagram.png){ .centered-figure width="320" }
+![Pipeline overview](assets/images/Diagram.jpeg){ .centered-figure width="320" }
 
 ## Software
 

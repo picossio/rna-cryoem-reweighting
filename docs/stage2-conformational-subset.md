@@ -9,7 +9,13 @@ which frames each one stands for.
     - Frames from [Prior ensemble](inputs-cg-sampling.md) — trajectory
       coordinates plus a matching topology PDB
     - Number of clusters *K*
-    - Collective variables (CVs) to perform farthest-point sampling (FPS) on
+    - (optional) Collective variables (CVs) to perform farthest-point sampling (FPS) on
+
+!!! warning "CV space vs. RMSD space"
+    The tutorial below performs FPS in CV space, but this could also be done
+    in RMSD space, as in
+    [Mattingly, Evans, Cossio 2026](https://arxiv.org/abs/2606.14449). Code
+    for the RMSD-space variant will be released soon.
 
 ## Running it
 
@@ -57,7 +63,7 @@ random seeds. It takes a few minutes for ~10⁵ frames and needs no GPU.
 | `--cv_path` | A precomputed `(N_frames, D_cv)` `.npy` array, used instead of `--cv`. |
 | `--cv_labels` | Axis labels for `clustering.png`, one per CV. Cosmetic. |
 | `--n_clusters` | Integer, the size of the subset. Default `40`. |
-| `--seeds` | Comma-separated integers, one independent set per seed. Default `42,12345,162,160,70`. |
+| `--seeds` | Comma-separated integers, one independent set per clustering seed. Default `42,12345,162,160,70`. |
 | `--backend` | `fpsample` (default, fast Rust implementation) or `numpy`. |
 | `--refine` | Flag. Runs the max-min refinement pass after FPS — see [Refinement](#refinement). |
 
@@ -68,7 +74,7 @@ writing the representative structures. The complete list is in the
 
 ### Output
 
-It writes one directory per seed:
+It writes one directory per clustering seed:
 
 ```
 /data/clusters/my_system/
@@ -153,11 +159,6 @@ the closed state and the G6-A81 distance.
     RMSD in Å with a distance in nm. Rescale the columns and pass them with
     `--cv_path` if you want the CVs weighted equally.
 
-!!! note
-    FPS could in principle be run on pairwise RMSD instead of CVs, but that is
-    not supported here: the RMSD matrix is quadratic in the number of frames,
-    and CV space is what the downstream analysis is expressed in anyway.
-
 ### How many clusters
 
 `--n_clusters` trades resolution against statistics in both directions: more
@@ -187,9 +188,10 @@ necessary. `--refine` sweeps the centers, proposing random candidate swaps and
 accepting any that increases the minimum pairwise distance between them; it
 stops as soon as a full sweep finds no improvement.
 
-This is not cosmetic — on the P4-P6 run above it moved between 0 and 9 of the
-40 centers depending on the seed. It is the slower path, since the candidate
-pool defaults to 10% of the trajectory per center per sweep (`--pool_frac`).
+This step can meaningfully change which frames end up as centers, so it is
+worth enabling. It is the slower path, since at each sweep it draws a
+candidate pool of frames to try as swaps — by default 10% of the trajectory
+per center (`--pool_frac`).
 
 !!! note "Backends"
     `--backend fpsample` (the default) and `--backend numpy` implement the same
