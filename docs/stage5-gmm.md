@@ -92,9 +92,7 @@ components are needed to explain 95% of that cluster's variance — a floppy
 region of the molecule earns more dimensions than a rigid one. The covariance
 in that reduced basis is estimated with a Ledoit-Wolf shrinkage estimator,
 which behaves far better than a plain sample covariance when a cluster holds
-only a few hundred frames. This is the covariance that
-[Stage 1](stage2-conformational-subset.md) lists among its outputs; it is
-computed here because this is where it is used.
+only a few hundred frames.
 
 **Clusters too small to fit.** A cluster with fewer than about twice its
 retained dimensions gets an identity basis pinned to its center frame and a
@@ -148,8 +146,7 @@ top-N by bond log-prob` — means nothing at all cleared the cutoff for that
 component, and its samples should be treated with suspicion.
 
 It is also worth opening a few of the sampled PDBs and confirming they look
-like the molecule rather than a tangle: the filter checks consecutive bond
-lengths, not the whole fold.
+like the molecule rather than a tangle.
 
 For a trajectory stored in Ångström, note that this step has no unit
 conversion — it works in whatever units the trajectory uses, and the bond

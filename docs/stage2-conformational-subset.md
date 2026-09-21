@@ -124,8 +124,8 @@ members to estimate that from.
     in a local PCA basis with a Ledoit-Wolf shrinkage estimator. In practice
     that calculation is done by cryoGMM's `gmm_build.py`, which you run in
     [Stage 4](stage5-gmm.md); it is cached on disk and reused across all
-    downstream jobs. Conceptually it belongs to this stage, so it is listed
-    among the outputs below.
+    downstream jobs. Conceptually it belongs to this stage, even though it is
+    not produced until Stage 4.
 
 ## Choosing the parameters
 
@@ -221,8 +221,10 @@ space, with no large occupied area left without a nearby center.
     - **Representative conformations** — the selected conformations, in PDB
       format (all-atom or one bead per residue)
     - **Cluster assignment** — which frames each representative stands for
-    - **Covariance** — the local conformational flexibility around each
-      representative, equivalent to a 3N×3N covariance matrix in Cartesian
-      space (computed in [Stage 4](stage5-gmm.md); see the note above)
+
+!!! note "About covariances"
+    The local covariance for each representative is computed with
+    `cryogmm-build-gmm` in [Stage 4](stage5-gmm.md), which also requires the
+    reweighted cluster weights from [Stage 3](stage4-reweighting.md).
 
 Next: [2. Likelihood →](stage3-likelihood.md)

@@ -2,15 +2,13 @@
 
 ## Citation
 
-TODO: add the paper citation here once available.
+🚧 Coming soon.
 
 The full mathematical details of the method are described in the
 Supplementary Information of the paper (not published on this site).
 
 ## Contact
 
-TODO: add contact information.
+Steve Bonilla <sbonilla@rockefeller.edu>
 
-## Acknowledgments
-
-TODO: add acknowledgments.
+Pilar Cossio <pcossio@flatironinstitute.org>
