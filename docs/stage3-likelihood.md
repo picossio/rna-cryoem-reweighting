@@ -21,7 +21,7 @@ best suited.
 - **cryoLike**
   [:material-github: flatironinstitute/CryoLike](https://github.com/flatironinstitute/CryoLike)
 - **cryoSBI**
-  [:material-github: flatironinstitute/cryoSBI](https://github.com/flatironinstitute/cryoSBI/tree/classifier_multi_particle)
+  [:material-github: flatironinstitute/cryoSBI_classifier](https://github.com/flatironinstitute/cryoSBI_classifier)
 
 </div>
 

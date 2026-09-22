@@ -49,7 +49,7 @@ GPU by default (`--device cuda:0`).
 
 Stage 2 uses a separate likelihood package — either
 [CryoLike](https://github.com/flatironinstitute/CryoLike) or
-[cryoSBI](https://github.com/flatironinstitute/cryoSBI) — each with its own
+[cryoSBI](https://github.com/flatironinstitute/cryoSBI_classifier) — each with its own
 installation instructions; see that stage's page.
 
 Generating the prior ensemble in the first place needs a coarse-grained
